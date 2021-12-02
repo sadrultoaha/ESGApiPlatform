@@ -26,24 +26,24 @@ namespace ESGApiPlatform.Repository
 
                     while (await dr.ReadAsync())
                     {
-                        model.CurrentMonthDisbursement = (float) Convert.ToDouble(dr["CurrentMonthDisbursement"] as float?);
-                        model.Last12MonthDisbursement = (float)Convert.ToDouble(dr["Last12MonthDisbursement"] as float?);
+                        model.CurrentMonthDisbursement =  Convert.ToDouble(dr["CurrentMonthDisbursement"] as double?);
+                        model.Last12MonthDisbursement =  Convert.ToDouble(dr["Last12MonthDisbursement"] as double?);
                         model.Last12MonthBorrower = Convert.ToInt32(dr["Last12MonthBorrower"] as int?);                       
-                        model.Last12MonthDisbursementPercentageOnFemaleBorrower = (float)Convert.ToDouble(dr["Last12MonthDisbursementPercentageOnFemaleBorrower"] as float?);                       
-                        model.Last12MonthDisbursementPercentageOnMaleBorrower = (float)Convert.ToDouble(dr["Last12MonthDisbursementPercentageOnMaleBorrower"] as float?);                       
-                        model.Last12MonthAvarageDisbursementOnFemaleBorrower = (float)Convert.ToDouble(dr["Last12MonthAvarageDisbursementOnFemaleBorrower"] as float?);                        
-                        model.Last12MonthAvarageDisbursementOnMaleBorrower = (float)Convert.ToDouble(dr["Last12MonthAvarageDisbursementOnMaleBorrower"] as float?);                       
-                        model.YoYAvarageDisbursementOnFemaleBorrower = (float)Convert.ToDouble(dr["YoYAvarageDisbursementOnFemaleBorrower"] as float?);                       
-                        model.YoYAvarageDisbursementOnMaleBorrower = (float)Convert.ToDouble(dr["YoYAvarageDisbursementOnMaleBorrower"] as float?);                       
-                        model.CurrentMonthDeposit = (float)Convert.ToDouble(dr["CurrentMonthDeposit"]) as float?;                        
-                        model.Last12MonthDeposit = (float)Convert.ToDouble(dr["Last12MonthDeposit"] as float?);                       
+                        model.Last12MonthDisbursementPercentageOnFemaleBorrower = Convert.ToDouble(dr["Last12MonthDisbursementPercentageOnFemaleBorrower"] as double?);                       
+                        model.Last12MonthDisbursementPercentageOnMaleBorrower = Convert.ToDouble(dr["Last12MonthDisbursementPercentageOnMaleBorrower"] as double?);                       
+                        model.Last12MonthAvarageDisbursementOnFemaleBorrower = Convert.ToDouble(dr["Last12MonthAvarageDisbursementOnFemaleBorrower"] as double?);                        
+                        model.Last12MonthAvarageDisbursementOnMaleBorrower = Convert.ToDouble(dr["Last12MonthAvarageDisbursementOnMaleBorrower"] as double?);                       
+                        model.YoYAvarageDisbursementOnFemaleBorrower = Convert.ToDouble(dr["YoYAvarageDisbursementOnFemaleBorrower"] as double?);                       
+                        model.YoYAvarageDisbursementOnMaleBorrower = Convert.ToDouble(dr["YoYAvarageDisbursementOnMaleBorrower"] as double?);                       
+                        model.CurrentMonthDeposit = Convert.ToDouble(dr["CurrentMonthDeposit"]) as double?;                        
+                        model.Last12MonthDeposit = Convert.ToDouble(dr["Last12MonthDeposit"] as double?);                       
                         model.Last12MonthDepositor = Convert.ToInt32(dr["Last12MonthDepositor"] as int?); 
-                        model.Last12MonthDepositPercentageOnFemaleDepositor = (float)Convert.ToDouble(dr["Last12MonthDepositPercentageOnFemaleDepositor"] as float?);                       
-                        model.Last12MonthDepositPercentageOnMaleDepositor = (float)Convert.ToDouble(dr["Last12MonthDepositPercentageOnMaleDepositor"] as float?);                                          
-                        model.Last12MonthAvarageDepositOnFemaleDepositor = (float)Convert.ToDouble(dr["Last12MonthAvarageDepositOnFemaleDepositor"] as float?);                       
-                        model.Last12MonthAvarageDepositOnMaleDepositor = (float)Convert.ToDouble(dr["Last12MonthAvarageDepositOnMaleDepositor"] as float?);                      
-                        model.YoYAvarageDepositOnFemaleDepositor = (float)Convert.ToDouble(dr["YoYAvarageDepositOnFemaleDepositor"] as float?); 
-                        model.YoYAvarageLoanSizeOnMaleDepositor = (float)Convert.ToDouble(dr["YoYAvarageLoanSizeOnMaleDepositor"] as float?);                      
+                        model.Last12MonthDepositPercentageOnFemaleDepositor = Convert.ToDouble(dr["Last12MonthDepositPercentageOnFemaleDepositor"] as double?);                       
+                        model.Last12MonthDepositPercentageOnMaleDepositor = Convert.ToDouble(dr["Last12MonthDepositPercentageOnMaleDepositor"] as double?);                                          
+                        model.Last12MonthAvarageDepositOnFemaleDepositor = Convert.ToDouble(dr["Last12MonthAvarageDepositOnFemaleDepositor"] as double?);                       
+                        model.Last12MonthAvarageDepositOnMaleDepositor = Convert.ToDouble(dr["Last12MonthAvarageDepositOnMaleDepositor"] as double?);                      
+                        model.YoYAvarageDepositOnFemaleDepositor = Convert.ToDouble(dr["YoYAvarageDepositOnFemaleDepositor"] as double?); 
+                        model.YoYAvarageLoanSizeOnMaleDepositor = Convert.ToDouble(dr["YoYAvarageLoanSizeOnMaleDepositor"] as double?);                      
                         model.MonthStart = Convert.ToDateTime(dr["MonthStart"] as DateTime?);                       
                         model.MonthEnd = Convert.ToDateTime(dr["MonthEnd"] as DateTime?);                     
                         model.YearStart = Convert.ToDateTime(dr["YearStart"] as DateTime?);
