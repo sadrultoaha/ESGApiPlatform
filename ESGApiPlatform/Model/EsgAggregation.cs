@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ESGApiPlatform.Model
 {
-    public class EsgApi
+    public class EsgAggregation
     {
 
         public double? CurrentMonthDisbursement { get; set; }

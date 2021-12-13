@@ -12,7 +12,7 @@ namespace ESGApiPlatform.Service
 {
     public interface IEsgApiService
     {
-        Task<EsgApi> GetData();
+        Task<EsgApiData> GetData();
     }
 
     public class EsgApiService: IEsgApiService
@@ -25,9 +25,9 @@ namespace ESGApiPlatform.Service
             _esgApiRepository = esgApiRepository;
 
         }
-        public async Task <EsgApi> GetData()
+        public async Task <EsgApiData> GetData()
         {
-            using(SqlConnection conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
                 if (conn.State != ConnectionState.Open)
                 {

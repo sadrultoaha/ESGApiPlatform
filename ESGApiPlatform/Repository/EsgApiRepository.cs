@@ -9,16 +9,17 @@ namespace ESGApiPlatform.Repository
 {
     public interface IEsgApiRepository
     {
-        Task<EsgApi> GetData(SqlConnection conn);
+        Task<EsgApiData> GetData(SqlConnection conn);
     }
     public class EsgApiRepository: IEsgApiRepository
     {
-        public async Task<EsgApi> GetData(SqlConnection conn)
+        public async Task<EsgApiData> GetData(SqlConnection conn)
         {
-            EsgApi model = new EsgApi(); 
-            try
+            EsgApiData data = new EsgApiData();
+
+            try // Query for Aggregation table
             {
-                string sql = @"select * from [esg]";
+                string sql = @"select * from [Aggregation]";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -26,6 +27,7 @@ namespace ESGApiPlatform.Repository
 
                     while (await dr.ReadAsync())
                     {
+                        EsgAggregation model = new EsgAggregation();
                         model.CurrentMonthDisbursement =  Convert.ToDouble(dr["CurrentMonthDisbursement"] as double?);
                         model.Last12MonthDisbursement =  Convert.ToDouble(dr["Last12MonthDisbursement"] as double?);
                         model.Last12MonthBorrower = Convert.ToInt32(dr["Last12MonthBorrower"] as int?);                       
@@ -50,6 +52,7 @@ namespace ESGApiPlatform.Repository
                         model.YearEnd = Convert.ToDateTime(dr["YearEnd"] as DateTime?);
                         model.CreatedAt = Convert.ToDateTime(dr["CreatedAt"] as DateTime?);
 
+                        data.Aggregation = model;
                     }
                     await dr.CloseAsync();
                 }
@@ -59,8 +62,42 @@ namespace ESGApiPlatform.Repository
             {
                 return null;
             }
+            // Query for SDG table
+            try
+            {
+                string sql = @"select * from [SDG]";
 
-            return model;
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader dr = await cmd.ExecuteReaderAsync();
+
+                    while (await dr.ReadAsync())
+                    {
+                        EsgSDG model = new EsgSDG();
+
+                        model.Last12MonthDisbursementZeroHunger = Convert.ToDouble(dr["Last12MonthDisbursementZeroHunger"] as double?);
+                        model.Last36MonthDisbursementZeroHunger = Convert.ToDouble(dr["Last36MonthDisbursementZeroHunger"] as double?);
+                        model.Last36MonthBorrowerOfZeroHunger = Convert.ToInt32(dr["Last36MonthBorrowerOfZeroHunger"] as int?);
+                        model.Last36MonthAvarageDisbursementOnZeroHunger = Convert.ToDouble(dr["Last36MonthAvarageDisbursementOnZeroHunger"] as double?);
+                        model.YoYAvarageDisbursementOnZeroHunger = Convert.ToDouble(dr["YoYAvarageDisbursementOnZeroHunger"] as double?);
+                        model.Last36MonthHouseholdMemberOfZeroHunger = Convert.ToInt32(dr["Last36MonthHouseholdMemberOfZeroHunger"] as int?);
+                        model.YearStart = Convert.ToDateTime(dr["YearStart"] as DateTime?);
+                        model.YearEnd = Convert.ToDateTime(dr["YearEnd"] as DateTime?);
+                        model.CreatedAt = Convert.ToDateTime(dr["CreatedAt"] as DateTime?);
+
+                        data.SDG = model;
+                    }
+                    await dr.CloseAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+            return data;
         }
+
     }
 }
