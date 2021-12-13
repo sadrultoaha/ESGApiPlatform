@@ -1,4 +1,5 @@
-﻿using ESGApiPlatform.Service;
+﻿using ESGApiPlatform.Model;
+using ESGApiPlatform.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +31,8 @@ namespace ESGApiPlatform.Controllers
         public async Task<IActionResult> GetData()
         {
             var data = await _esgApiService.GetData();
-            return StatusCode(StatusCodes.Status200OK, new { status = true, message = "Message", esgData = data });
+            if(data==null) return StatusCode(StatusCodes.Status500InternalServerError, new { status = false, message = "Information is unable to load.", esgData = data });
+            return StatusCode(StatusCodes.Status200OK, new { status = true, message = "Information has been loaded successfully.", esgData = data });
         }
     }
 }
