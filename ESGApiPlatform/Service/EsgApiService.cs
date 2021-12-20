@@ -12,7 +12,8 @@ namespace ESGApiPlatform.Service
 {
     public interface IEsgApiService
     {
-        Task<EsgApiData> GetData();
+        Task<EsgAggregation> GetAggregationData(int industries, int districts, int years);
+        Task<EsgSDG> GetSDGData(string type);
     }
 
     public class EsgApiService: IEsgApiService
@@ -25,7 +26,31 @@ namespace ESGApiPlatform.Service
             _esgApiRepository = esgApiRepository;
 
         }
-        public async Task <EsgApiData> GetData()
+        public async Task <EsgAggregation> GetAggregationData(int industries, int districts, int years)
+        {
+            EsgAggregation aggregationData = new EsgAggregation();
+            using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    await conn.OpenAsync();
+                }
+                try
+                {
+                    aggregationData = await _esgApiRepository.GetAggregationData(conn);
+                    aggregationData.AgeGroupWiseData = await _esgApiRepository.GetAgeGroupWiseData(conn);
+                    aggregationData.IndustryWiseRanking = await _esgApiRepository.GetIndustryWiseRankingData(conn, industries);
+                    aggregationData.DistrictWiseRanking = await _esgApiRepository.GetDistrictWiseRankingData(conn, districts);
+                    aggregationData.DisbursementTrendData = await _esgApiRepository.GetDisbursementTrendData(conn, years);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            return aggregationData;
+        }
+        public async Task<EsgSDG> GetSDGData(string type)
         {
             using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
             {
@@ -35,13 +60,13 @@ namespace ESGApiPlatform.Service
                 }
                 try
                 {
-                    return await _esgApiRepository.GetData(conn);
+                    return await _esgApiRepository.GetSDGData(conn, type);
                 }
                 catch
                 {
                     return null;
                 }
             }
-        } 
+        }
     }
 }

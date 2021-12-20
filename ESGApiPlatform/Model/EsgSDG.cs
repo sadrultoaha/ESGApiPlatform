@@ -7,12 +7,16 @@ namespace ESGApiPlatform.Model
 {
     public class EsgSDG
     {
-        public double? Last12MonthDisbursementZeroHunger { get; set; }
-        public double? Last36MonthDisbursementZeroHunger { get; set; }
-        public int? Last36MonthBorrowerOfZeroHunger { get; set; }
-        public double? Last36MonthAvarageDisbursementOnZeroHunger { get; set; }
-        public double? YoYAvarageDisbursementOnZeroHunger { get; set; }
-        public int? Last36MonthHouseholdMemberOfZeroHunger { get; set; }
+        public string Type { get; set; }
+        public double? Last12MonthDisbursement { get; set; }
+        public double? Last36MonthDisbursement { get; set; }
+        public int? Last36MonthBorrower { get; set; }
+        public double? Last36MonthAvarageDisbursement { get; set; }
+        public double? YoYAvarageDisbursement { get; set; }
+        public int? Last36MonthHouseholdMember { get; set; }
+        public string TopIndutryOnLast12MonthDisbursement { get; set; }
+        public string TopDistrictOnLast12MonthDisbursement { get; set; }
+        public double? Last36MonthDisbursementPercentageOnFemaleBorrower { get; set; }
         public DateTime? YearStart { get; set; }
         public DateTime? YearEnd { get; set; }
         public DateTime? CreatedAt { get; set; }

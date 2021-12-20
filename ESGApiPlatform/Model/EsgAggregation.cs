@@ -19,18 +19,24 @@ namespace ESGApiPlatform.Model
         public double? YoYAvarageDisbursementOnMaleBorrower { get; set; }
         public double? CurrentMonthDeposit { get; set; }
         public double? Last12MonthDeposit { get; set; }
-        public int? Last12MonthDepositor { get; set; }
         public double? Last12MonthDepositPercentageOnFemaleDepositor { get; set; }
         public double? Last12MonthDepositPercentageOnMaleDepositor { get; set; }
         public double? Last12MonthAvarageDepositOnFemaleDepositor { get; set; }
         public double? Last12MonthAvarageDepositOnMaleDepositor { get; set; }
         public double? YoYAvarageDepositOnFemaleDepositor { get; set; }
-        public double? YoYAvarageLoanSizeOnMaleDepositor { get; set; }
+        public double? YoYAvarageDepositOnMaleDepositor { get; set; }
+        public double? Last12MonthLargestLoanGivenToWomen { get; set; }
+        public double? Last12MonthLargestLoanGivenToMen { get; set; }
         public DateTime? MonthStart { get; set; }
         public DateTime? MonthEnd { get; set; }
         public DateTime? YearStart { get; set; }
         public DateTime? YearEnd { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public virtual List<AgeGroupWiseData> AgeGroupWiseData { get; set; }
+        public virtual List<IndustryWiseRanking> IndustryWiseRanking { get; set; }
+        public virtual List<DistrictWiseRanking> DistrictWiseRanking { get; set; }
+        public virtual List<DisbursementTrend> DisbursementTrendData { get; set; }
+
 
     }
 }
